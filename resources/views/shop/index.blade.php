@@ -3,6 +3,36 @@
 @section('page-title', 'Buy products online with great discount')
 
 @section('content')
+    {{-- flash sale --}}
+    @if($flashSaleProducts->count())
+        <section class="just-for-you-section container h-100 my-4">
+            <h3>Flash sale</h3>
+            <div class="row h-100">
+
+                @foreach($flashSaleProducts as $item)
+                    <div class="col-6 col-sm-4 col-md-2 p-2">
+                        <div class="card shadow-hover h-100" >
+                            <img src="{{asset($item->product->productImage->first()->original)}}" class="card-img-top" alt="">
+                            <div class="card-body ">
+                                <p class="product-title">{{substr($item->product->title,0,25)}}..</p>
+                                <button class="btn btn-info btn-sm disabled">{{(($item->product->price-$item->flash_price)/$item->product->price*100)}}% OFF</button>
+                                <br>
+                                <small class="line-through">Rs. {{number_format($item->product->price)}}</small>
+                                <p class="product-price">Rs. {{number_format($item->flash_price)}}</p>
+                            </div>
+                            <form action="{{route('directBuy.order')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$item->id}}">
+                                <button class="btn btn-primary btn-sm btn-block">Buy now</button>
+                            </form>
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+        </section>
+    @endif
+
     {{-- categories-section --}}
     <section class="categories-section container my-4 h-100">
         <h3>Categories</h3>
