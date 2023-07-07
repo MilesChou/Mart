@@ -74,32 +74,34 @@
                                     <p>{{ $product->product_code }}</p>
                                 </div>
 
-                                <div class="my-3">
-                                    <h4>Quantity:</h4>
-                                    <div class="d-flex">
-                                        <button onclick="cartDecrement()" class="btn btn-outline-primary px-3">-
-                                        </button>
-                                        <input type="text" value="1" id="cartCount" name="quantity" placeholder="1"
-                                               class="pl-3 border" disabled style="width: 50px">
-                                        <button onclick="cartIncrement()" class="btn btn-outline-primary px-3">+
-                                        </button>
+                                @feature('operation')
+                                    <div class="my-3">
+                                        <h4>Quantity:</h4>
+                                        <div class="d-flex">
+                                            <button onclick="cartDecrement()" class="btn btn-outline-primary px-3">-
+                                            </button>
+                                            <input type="text" value="1" id="cartCount" name="quantity" placeholder="1"
+                                                   class="pl-3 border" disabled style="width: 50px">
+                                            <button onclick="cartIncrement()" class="btn btn-outline-primary px-3">+
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <p>&nbsp;</p>
+                                    <p>&nbsp;</p>
 
-                                @if ($product->stock > 0)
-                                    <form action="{{ route('cart.store') }}" id="addToCartForm" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                        <input type="hidden" id="stockVal" value="{{ $product->stock }}">
-                                        <input type="hidden" id="quantity" name="quantity" value="">
-                                        <button id="addToCartBtn" type="submit" class="btn btn-orange">Add to Cart
-                                        </button>
-                                    </form>
-                                @else
-                                    <button id="addToCartBtn" class="btn btn-secondary">Out of stock</button>
-                                @endif
+                                    @if ($product->stock > 0)
+                                        <form action="{{ route('cart.store') }}" id="addToCartForm" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <input type="hidden" id="stockVal" value="{{ $product->stock }}">
+                                            <input type="hidden" id="quantity" name="quantity" value="">
+                                            <button id="addToCartBtn" type="submit" class="btn btn-orange">Add to Cart
+                                            </button>
+                                        </form>
+                                    @else
+                                        <button id="addToCartBtn" class="btn btn-secondary">Out of stock</button>
+                                    @endif
+                                @endfeature
 
                                 <p>&nbsp;</p>
 
