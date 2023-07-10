@@ -3,6 +3,9 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\MyCancellationController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\Feature\Activate;
+use App\Http\Controllers\Feature\Deactivate;
+use App\Http\Controllers\Feature\Status;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyOrderController;
 use App\Http\Controllers\User\Catalog;
@@ -56,3 +59,7 @@ Route::group(['middleware' => ['web', 'role:user|admin']], function () {
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::post('/user/address', [UserController::class, 'address'])->name('user.address');
 });
+
+Route::get('/feature/status/{for}/{name}', Status::class);
+Route::get('/feature/activate/{for}/{name}', Activate::class);
+Route::get('/feature/deactivate/{for}/{name}', Deactivate::class);
