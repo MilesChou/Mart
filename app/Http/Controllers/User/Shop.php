@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Carousel;
+use App\Models\FlashSale;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\View as ViewFactory;
@@ -12,8 +14,13 @@ use Illuminate\Support\Facades\View as ViewFactory;
  */
 class Shop extends Controller
 {
-    public function __invoke(Product $product): View
+    public function __invoke(Carousel $carousel, Product $product): View
     {
+        $carousels = $carousel->newQuery()
+            ->latest()
+            ->take(3)
+            ->get();
+
         $randomProducts = $product->newQuery()
             ->inRandomOrder()
             ->with('productImage')
@@ -21,6 +28,7 @@ class Shop extends Controller
             ->get();
 
         return ViewFactory::make('shop.index')->with([
+            'carousels' => $carousels,
             'newProducts' => $randomProducts,
         ]);
     }
