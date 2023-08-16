@@ -14,9 +14,12 @@ class Experiment
      */
     public function resolve(User | null $user): mixed
     {
+        $default = env('FEATURE_FLAGS_EXPERIMENT_DEFAULT');
+        $default = true;
+
         return match (true) {
-            $user === null => false,
-            default => Lottery::odds(50 / 100),
+            $user === null => $default ?? false,
+            default => $default ?? Lottery::odds(50 / 100),
         };
     }
 }
