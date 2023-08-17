@@ -14,7 +14,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('css')
 </head>
@@ -28,8 +28,8 @@
         @yield('content')
         @include('inc.app.footer')
     </div>
-    
-     
+
+
     @include('sweetalert::alert')
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/shop.js') }}"></script>
