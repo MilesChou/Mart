@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Features\Carousel;
+use App\Features\CustomerQuestion;
 use App\Features\Experiment;
 use App\Features\FlashSale;
 use App\Models\Category;
@@ -24,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('layouts.app', function ($view) {
             $navbarCategories = Category::with('subCategory')->take(7)->get();
             $view->with([
-                'navbarCategories' => $navbarCategories
+                'navbarCategories' => $navbarCategories,
             ]);
         });
         // View::composer('shop.index', function ($view) {
@@ -35,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         // });
 
         Feature::define(Carousel::class);
+        Feature::define(CustomerQuestion::class);
         Feature::define(Experiment::class);
         Feature::define(FlashSale::class);
     }

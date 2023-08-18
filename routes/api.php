@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\Api\CustomerQuestionApi;
 use App\Http\Controllers\Api\DeliveredApiController;
 use App\Http\Controllers\Api\FlashSaleAll;
 use App\Http\Controllers\Api\OrderApiController;
@@ -24,6 +25,9 @@ Route::get('/product/live/invert/{id}', [ProductApiController::class, 'liveInver
 
 //campaign flash sale
 Route::get('/flash-sale/all', FlashSaleAll::class)->name('flashSale.all');
+
+//customer question
+Route::get('/customer-question/all', CustomerQuestionApi::class)->name('customerQuestion.all');
 
 //orders api
 Route::get('/order/all', [OrderApiController::class, 'all'])->name('order.all');
