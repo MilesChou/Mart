@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Features\Carousel;
 use App\Features\Experiment;
 use App\Models\Category;
 use Illuminate\Pagination\Paginator;
@@ -32,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         //     ]);
         // });
 
+        Feature::define(Carousel::class);
         Feature::define(Experiment::class);
     }
 }
