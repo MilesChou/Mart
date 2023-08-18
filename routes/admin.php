@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CustomerQuestion\MessDelete;
 use App\Http\Controllers\Admin\CustomerQuestion\Reply;
 use App\Http\Controllers\Admin\CustomerQuestion\ReplyView;
 use App\Http\Controllers\Admin\DeliveredController;
+use App\Http\Controllers\Admin\FlashSaleController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
@@ -45,6 +46,20 @@ Route::group(['middleware' => ['web', 'role:admin']], function () {
         ->name('customerQuestion.massDelete');
     Route::put('/admin/customer-question/{question}/reply', Reply::class)
         ->name('customerQuestion.reply');
+
+
+    Route::get('/flash-sale', [FlashSaleController::class, 'index'])
+        ->name('flashSale.index');
+    Route::get('/flash-sale/create', [FlashSaleController::class, 'create'])
+        ->name('flashSale.create');
+    Route::post('/flash-sale', [FlashSaleController::class, 'store'])
+        ->name('flashSale.store');
+    Route::get('/flash-sale/{id}/edit', [FlashSaleController::class, 'edit'])
+        ->name('flashSale.edit');
+    Route::put('/flash-sale/{id}', [FlashSaleController::class, 'update'])
+        ->name('flashSale.update');
+    Route::delete('/flash-sale', [FlashSaleController::class, 'destroy'])
+        ->name('flashSale.destroy');
 
     Route::get('/user-management', [UserManagementController::class, 'index'])
         ->name('userManagement.index');
