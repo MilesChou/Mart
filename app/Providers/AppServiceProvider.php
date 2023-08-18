@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Features\Carousel;
 use App\Features\Experiment;
+use App\Features\FlashSale;
 use App\Models\Category;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
@@ -35,5 +36,6 @@ class AppServiceProvider extends ServiceProvider
 
         Feature::define(Carousel::class);
         Feature::define(Experiment::class);
+        Feature::define(FlashSale::class);
     }
 }
