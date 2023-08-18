@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyOrderController;
 use App\Http\Controllers\User\Catalog;
+use App\Http\Controllers\User\DirectBuy;
 use App\Http\Controllers\User\Order;
 use App\Http\Controllers\User\Shop;
 use App\Http\Controllers\User\ShowProduct;
@@ -55,4 +56,7 @@ Route::group(['middleware' => ['web', 'role:user|admin']], function () {
 
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::post('/user/address', [UserController::class, 'address'])->name('user.address');
+
+    // flash-sale products directly added to order
+    Route::post('/direct-buy', DirectBuy::class)->name('directBuy.order');
 });
