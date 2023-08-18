@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Features\Experiment;
 use App\Models\Category;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Pennant\Feature;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,5 +31,7 @@ class AppServiceProvider extends ServiceProvider
         //         'productCategories' => $productCategories
         //     ]);
         // });
+
+        Feature::define(Experiment::class);
     }
 }
