@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Features\CustomerQuestion;
 use App\Models\Category;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Pennant\Feature;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('layouts.app', function ($view) {
             $navbarCategories = Category::with('subCategory')->take(7)->get();
             $view->with([
-                'navbarCategories' => $navbarCategories
+                'navbarCategories' => $navbarCategories,
             ]);
         });
         // View::composer('shop.index', function ($view) {
@@ -29,5 +31,7 @@ class AppServiceProvider extends ServiceProvider
         //         'productCategories' => $productCategories
         //     ]);
         // });
+
+        Feature::define(CustomerQuestion::class);
     }
 }

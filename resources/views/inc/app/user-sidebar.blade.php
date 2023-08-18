@@ -22,6 +22,13 @@
       <i class="fas fa-window-close text-primary"></i> Cancellations
     </a>
   </li>
+  @feature('customer_question')
+  <li class="list-group-item-action list-group-item">
+    <a href="{{route('customerQuestion.index')}}">
+      <i class="fas fa-align-left text-primary"></i> My queries
+    </a>
+  </li>
+  @endfeature
   <li class="list-group-item-action list-group-item">
     <a href="{{route('account.logout')}}">
       <i class="fas fa-sign-out-alt text-primary"></i> Logout
