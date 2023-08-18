@@ -9,7 +9,9 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use Laravel\Pennant\Feature;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class Order
@@ -38,7 +40,19 @@ class Order
         } else {
             $totalPrice = $cart->product->price;
         }
-        $order->price = $totalPrice;
+
+        $isVip = Feature::for($user)->active('vip');
+
+        if ($isVip) {
+            $order->price = (int)$totalPrice * 0.9;
+        } else {
+            $order->price = $totalPrice;
+        }
+
+        Log::info('User ordered', [
+            'user' => $user->email,
+            'is_vip' => $isVip,
+        ]);
 
         if ($order->save()) {
             //cart delete
